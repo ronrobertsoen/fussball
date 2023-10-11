@@ -16,7 +16,7 @@ Trainer können Veranstaltungen planen, Spieler können ihre Teilnahme bestätig
 3. **Spieler- und Teammanagementseite**: Verwaltung der Spielerprofile und Ansicht von Teamstatistiken.
 4. **Statistikanalyse-Seite**: Erfassung und Analyse von Spielstatistiken.
 5. **Kalenderansicht**: Monatliche Ansicht der geplanten Veranstaltungen.
-# Punkt 4. und 5. noch unentschlossen,je nachdem welches eher einfacher zu implementieren ist.
+### Punkt 4. und 5. noch unentschlossen,je nachdem welches eher einfacher zu implementieren ist.
 
 ### Datenmanagement
 - **Einlesen**: Import von Spielerdaten und Spielplänen.
