@@ -30,7 +30,7 @@ Trainer können Veranstaltungen planen, Spieler können ihre Teilnahme bestätig
 
 ### Externe Datenquellen
 - Generell werden keine Externe Datenquellen benötgt.
-- Optional kann die Einbindung externer Datenquellen für Wetterprognosen, Spielpläne oder Live-Spielstatistiken realisiert werden.
+- Optional könnte die Einbindung externer Datenquellen für Wetterprognosen, Spielpläne oder Live-Spielstatistiken realisiert werden.
 
 ## Ziel
 Die Plattform zielt darauf ab, den Verwaltungsaufwand für Trainer zu minimieren und gleichzeitig die Kommunikation und Koordination zwischen den Teammitgliedern zu verbessern.
