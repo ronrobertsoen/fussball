@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Spielerübersicht{% endblock %}
+
+{% block content %}
+
+
+
+
+<h1 align="center">Planübersicht</h1>
+<ul class="list-group">
+    {% for event in events %}
+    <li class="list-group-item">
+        <h3>{{ event.event_type }}</h3>
+        <p>Beschreibung: {{ event.description }}</p>
+        <p>Zeit: {{ event.event_time.strftime('%d.%m.%Y %H:%M') }}</p>
+        <p>Treffpunkt: {{ event.location }}</p>
+        {% set green_class = '' %}
+        {% set red_class = '' %}
+        {% if event.zusagen | length >0 %}
+            {% if event.zusagen[0].status == "zusage"%}
+              {% set green_class = "green" %}
+            {% else %}
+              {% set red_class = "red" %}
+            {% endif %}
+        {% endif %}
+        <button onclick="sendResponse('{{ event.id }}', 'zusage')" class="{{green_class}}">Zusage</button>
+        <button onclick="sendResponse('{{ event.id }}', 'absage')" class="{{red_class}}">Absage</button>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block javascript %}
+<script>
+function sendResponse(eventId, response) {
+  fetch('/event-response', {
+    method: 'POST',
+    body: JSON.stringify({
+      event_id: eventId,
+      response: response
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      console.error('Fehler: Netzwerkantwort war nicht ok.');
+    }else{ 
+      window.location.reload(true);
+    }
+  })
+}
+</script>
+{% endblock %}

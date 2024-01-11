@@ -17,6 +17,8 @@
     crossorigin="anonymous"
   />
 
+<link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+
   <!-- Jinga -->
   <title>{% block title %}Home{% endblock %}</title>
 </head>
@@ -34,13 +36,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar">
           <div class="navbar-nav"> 
-
+            {% if current_user.is_authenticated %}
             <a class="nav-item nav-link" id="home" href="/">Home</a>
+            <a class="nav-item nav-link" id="uebersicht" href="{{ url_for('views.uebersicht') }}">Planübersicht</a>
             <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-
+            {% else %}
             <a class="nav-item nav-link" id="login" href="/login">Login</a>
             <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-
+            {% endif %}
           </div>
         </div>
       </nav>
@@ -84,10 +87,10 @@
   
   {% block javascript %}
       <script type="text/javascript">
-        function deleteNote(noteId) {
-    fetch("/delete-note", {
+        function deleteEvent(eventId) {
+    fetch("/delete-event", {
       method: "POST",
-      body: JSON.stringify({ noteId: noteId }),
+      body: JSON.stringify({ eventId: eventId }),
     }).then((_res) => {
       window.location.href = "/";
     });

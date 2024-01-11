@@ -10,7 +10,7 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    if request.method == 'POST': ##POST Anfrage (Benutzer sendet Daten ein)
         email = request.form.get('email')
         password = request.form.get('password')
 
@@ -26,19 +26,20 @@ def login():
             flash('Email does not exist.', category='error')
 
 
-    return render_template("login.html", boolean=True)
+    return render_template("login.html", user=current_user)
 
 @auth.route('/logout')
 @login_required
 def logout():
-    logout_user()
-    return redirect(url_for('auth.login'))
+    logout_user() ##Meldet Benutzer ab
+    return redirect(url_for('auth.login')) ##Leitet weiter zu Login Seite
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
-    if request.method == 'POST':
+    if request.method == 'POST': ##wenn Nutzer Registrierungsformular ausfüllt
         email = request.form.get('email')
         first_name = request.form.get('firstName')
+        role = request.form.get('role')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
@@ -54,11 +55,11 @@ def sign_up():
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 8:
             flash('Password must be at least 7 characters.', category='error')
-        else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='pbkdf2:sha256'))
+        else: ##Bei gültigen Daten wird ein neuer Benutzer erstellt, das Passwort sicher gehasht und der Benutzer in die Datenbank eingefügt und eingeloggt.
+            new_user = User(email=email, first_name=first_name, role=role, password=generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
-            login_user(user, remember=True)
+            login_user(new_user, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('views.home'))
 

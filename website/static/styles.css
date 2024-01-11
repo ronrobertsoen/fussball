@@ -1,0 +1,13 @@
+.main-header {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}
