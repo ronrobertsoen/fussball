@@ -11,13 +11,14 @@
         <button type="button" class="close" onclick="deleteEvent('{{ event.id }}')">
             <span aria-hidden="true">&times;</span>
         </button>
+    
     </li>
     {% endfor %}
 </ul>
 
 {% if current_user.is_trainer() %}
 <form method="POST">
-    <div class="mb-5">
+    <div class="mb-4">
         <label for="eventType">Art des Events:</label>
         <select class="form-control" id="eventType" name="event_type">
             <option value="Training">Training</option>
@@ -25,22 +26,22 @@
         </select>
     </div>
 
-    <div class="mb-5">
+    <div class="mb-4">
         <label for="eventDescription">Beschreibung</label>
         <textarea name="description" class="form-control" id="eventDescription" cols="30" rows="2"></textarea>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
         <label for="eventTime">Zeit:</label>
         <input type="datetime-local" class="form-control" id="eventTime" name="event_time">
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
         <label for="location">Treffpunkt:</label>
         <input type="text" class="form-control" id="location" name="location">
     </div>
 
-    <div align="center" style="margin-top: 10px;">
+    <div align="center">
         <button type="submit" class="btn btn-primary">Füge das Event hinzu</button>
     </div>
 </form>
