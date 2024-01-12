@@ -5,17 +5,21 @@ from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 
-
+# Erstellen eines Blueprints für Authentifizierungsseiten
 auth = Blueprint('auth', __name__)
 
+# Route für die Login-Seite
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    # Überprüfen, ob die Anfrage eine POST-Anfrage ist (Benutzerdaten gesendet)
     if request.method == 'POST': ##POST Anfrage (Benutzer sendet Daten ein)
         email = request.form.get('email')
         password = request.form.get('password')
 
+        # Überprüfen, ob ein Benutzer mit dieser E-Mail existiert
         user = User.query.filter_by(email=email).first()
         if user:
+            # Überprüfen, ob das eingegebene Passwort korrekt ist
             if check_password_hash(user.password, password):
                 flash('Logged in succesfull', category='success')
                 login_user(user, remember=True)
@@ -25,42 +29,48 @@ def login():
         else:
             flash('Email does not exist.', category='error')
 
-
+    # Render der Login-HTML-Seite
     return render_template("login.html", user=current_user)
 
+# Route für die Logout-Funktionalität
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user() ##Meldet Benutzer ab
     return redirect(url_for('auth.login')) ##Leitet weiter zu Login Seite
 
+
+# Route für die Registrierungsseite
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
+    # Überprüfen, ob die Anfrage eine POST-Anfrage ist (Benutzerdaten gesendet)
     if request.method == 'POST': ##wenn Nutzer Registrierungsformular ausfüllt
         email = request.form.get('email')
-        first_name = request.form.get('firstName')
+        name = request.form.get('Name')
         role = request.form.get('role')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
+        # Überprüfen, ob bereits ein Benutzer mit dieser E-Mail existiert
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
 
         if len(email) < 4:
             flash('Email must be greater than 3 characters.', category='error')
-        elif len(first_name) < 2:
-            flash('First name must be greater than 1 character.', category='error')
+        elif len(name) < 2:
+            flash('Name must be greater than 1 character.', category='error')
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 8:
             flash('Password must be at least 7 characters.', category='error')
         else: ##Bei gültigen Daten wird ein neuer Benutzer erstellt, das Passwort sicher gehasht und der Benutzer in die Datenbank eingefügt und eingeloggt.
-            new_user = User(email=email, first_name=first_name, role=role, password=generate_password_hash(password1, method='pbkdf2:sha256'))
+            new_user = User(email=email, name=name, role=role, password=generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('views.home'))
 
+    # Render der Registrierungs-HTML-Seite
     return render_template("sign_up.html", user=current_user)
