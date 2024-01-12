@@ -1,54 +1,64 @@
-{% extends "base.html" %}
-{% block title %}Übersicht{% endblock %}
+    {% extends "base.html" %}
+    {% block title %}Übersicht{% endblock %}
 
-{% block content %}
-<h1 class="main-header">Event eintragen</h1>
-<ul class="list-group list-group-flush" id="events">
-    {% for event in current_user.events %}
-    <li class="list-group-item">
-        {{ event.event_type }} - {{ event.description }} - {{ event.event_time.strftime('%Y-%m-%d %H:%M') }} - {{
-        event.location }}
-        <button type="button" class="close" onclick="deleteEvent('{{ event.id }}')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    
-    </li>
-    {% endfor %}
-</ul>
+    {% block content %}
+    <h1 class="main-header">Event eintragen</h1>
 
-{% if current_user.is_trainer() %}
-<form method="POST">
-    <div class="mb-4">
-        <label for="eventType">Art des Events:</label>
-        <select class="form-control" id="eventType" name="event_type">
-            <option value="Training">Training</option>
-            <option value="Match">Match</option>
-        </select>
-    </div>
+    <!-- Liste der Events, die dem aktuellen Benutzer zugeordnet sind -->
+    <ul class="list-group list-group-flush" id="events">
+        <!-- Schleife über jedes Event in der Liste des aktuellen Benutzers -->
+        {% for event in current_user.events %}
+        <li class="list-group-item">
+            {{ event.event_type }} - {{ event.description }} - {{ event.event_time.strftime('%Y-%m-%d %H:%M') }} - {{
+            event.location }}
+            <button type="button" class="close" onclick="deleteEvent('{{ event.id }}')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        
+        </li>
+        {% endfor %}
+    </ul>
 
-    <div class="mb-4">
-        <label for="eventDescription">Beschreibung</label>
-        <textarea name="description" class="form-control" id="eventDescription" cols="30" rows="2"></textarea>
-    </div>
+    <!-- Bedingung, die überprüft, ob der aktuelle Benutzer ein Trainer ist -->
+    {% if current_user.is_trainer() %}
+    <!-- Formular zum Hinzufügen neuer Events -->
+    <form method="POST">
+        <!-- Auswahl des Event-Typs -->
+        <div class="mb-4">
+            <label for="eventType">Art des Events:</label>
+            <select class="form-control" id="eventType" name="event_type">
+                <option value="Training">Training</option>
+                <option value="Match">Match</option>
+            </select>
+        </div>
 
-    <div class="mb-4">
-        <label for="eventTime">Zeit:</label>
-        <input type="datetime-local" class="form-control" id="eventTime" name="event_time">
-    </div>
+        <!-- Eingabefeld für die Beschreibung des Events -->
+        <div class="mb-4">
+            <label for="eventDescription">Beschreibung</label>
+            <textarea name="description" class="form-control" id="eventDescription" cols="30" rows="2"></textarea>
+        </div>
 
-    <div class="mb-4">
-        <label for="location">Treffpunkt:</label>
-        <input type="text" class="form-control" id="location" name="location">
-    </div>
+        <!-- Eingabefeld für die Zeit des Events -->
+        <div class="mb-4">
+            <label for="eventTime">Zeit:</label>
+            <input type="datetime-local" class="form-control" id="eventTime" name="event_time">
+        </div>
 
-    <div align="center">
-        <button type="submit" class="btn btn-primary">Füge das Event hinzu</button>
-    </div>
-</form>
-{% endif %}
+        <!-- Eingabefeld für den Treffpunkt des Events -->
+        <div class="mb-4">
+            <label for="location">Treffpunkt:</label>
+            <input type="text" class="form-control" id="location" name="location">
+        </div>
+        
+        <!-- Button zum Absenden des Formulars -->
+        <div align="center">
+            <button type="submit" class="btn btn-primary">Füge das Event hinzu</button>
+        </div>
+    </form>
+    {% endif %}
+
+    <!-- Link zur Planübersicht-Seite -->
+    <a href="{{ url_for('views.uebersicht') }}" class="btn btn-info">Zur Planübersicht</a>
 
 
-<a href="{{ url_for('views.uebersicht') }}" class="btn btn-info">Zur Planübersicht</a>
-
-
-{% endblock %}
+    {% endblock %}

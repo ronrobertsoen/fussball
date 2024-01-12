@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <main>
 <head>
+    <!-- Meta-Tags für Zeichensatz und Ansichts-Port-Einstellungen -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
-    <!-- Bootstrap CSS Stylesheet-->
+    <!-- Einbindung des Bootstrap CSS Frameworks für Styling -->
     <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -17,15 +18,18 @@
     crossorigin="anonymous"
   />
 
-<link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+  <!-- Einbindung eines benutzerdefinierten Stylesheets -->
+  <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 
-  <!-- Jinga -->
+  <!-- Titel des Dokuments, der in den Browser-Tabs angezeigt wird -->
   <title>{% block title %}Home{% endblock %}</title>
 </head>
 
 
-<body> <!--Javascript related Bootstrap framefork-->
+<body> <!--Hauptteil des HTML-Dokuments-->
+  <!-- Navigation (Navbar) für die Webseite mit Bootstrap-Styling -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <!-- Button für mobile Ansicht -->
         <button
           class="navbar-toggler"
           type="button"
@@ -34,8 +38,10 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Navigationslinks -->
         <div class="collapse navbar-collapse" id="navbar">
           <div class="navbar-nav"> 
+            <!-- Bedingungen, um Links basierend auf dem Authentifizierungsstatus anzuzeigen -->
             {% if current_user.is_authenticated %}
             <a class="nav-item nav-link" id="home" href="/">Home</a>
             <a class="nav-item nav-link" id="uebersicht" href="{{ url_for('views.uebersicht') }}">Planübersicht</a>
@@ -48,6 +54,7 @@
         </div>
       </nav>
   
+      <!-- Abschnitt für Flash-Nachrichten, die Benachrichtigungen anzeigen -->
       {% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %} {% for category, message in messages %} {% if category ==
       'error' %}
@@ -67,8 +74,11 @@
         </button>
       </div>
       {% endif %} {% endfor %} {% endif %} {% endwith %}
-  
+      
+      <!-- Hauptinhalt der Seite, der von anderen HTML-Vorlagen gefüllt wird -->
       <div class="container">{% block content %} {% endblock %}</div>
+
+      <!-- Einbindung von JavaScript-Bibliotheken für Funktionalität und Animation -->
       <script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -85,6 +95,7 @@
         crossorigin="anonymous"
       ></script>
   
+      <!-- JavaScript-Block für zusätzliche Funktionalität, z.B. das Löschen von Events -->
   {% block javascript %}
       <script type="text/javascript">
         function deleteEvent(eventId) {
