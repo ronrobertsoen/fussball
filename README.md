@@ -1,36 +1,28 @@
-# fussball
+Diese Flask-basierte Webanwendung ermöglicht es Benutzern, Fussball Events zu verwalten und zu organisieren. Sie ist ideal für Trainer und Teams, um Trainings und Spiele zu planen und zu koordinieren.
 
-# Fussball-Management-Plattform
-
-## Ausgangslage
-In der organisierten Sportwelt, speziell im Bereich Fussball, gibt es eine Notwendigkeit für eine effiziente und zentrale Verwaltungsplattform. 
-Trainer und Spieler benötigen eine unkomplizierte Möglichkeit, um Trainings, Spiele und die damit verbundenen Informationen zu planen und zu kommunizieren.
-
-## Projektidee / Funktion
-Die Fussball-Management-Plattform zielt darauf ab, die Verwaltung von Trainingseinheiten und Fussballspielen zu vereinfachen. 
-Trainer können Veranstaltungen planen, Spieler können ihre Teilnahme bestätigen, und alle Beteiligten haben Zugriff auf wichtige Informationen.
-
-### Ansichten
-1. **Homepage**: Übersicht über anstehende Veranstaltungen und wichtige Mitteilungen.
-2. **Veranstaltungsseite**: Auflistung aller geplanten Trainings und Spiele mit Detailansicht.
-3. **Spieler- und Teammanagementseite**: Verwaltung der Spielerprofile und Ansicht von Teamstatistiken.
-4. **(Statistikanalyse-Seite**: Erfassung und Analyse von Spielstatistiken.)
-5. **(Kalenderansicht**: Monatliche Ansicht der geplanten Veranstaltungen.)
+## Hauptfunktionen:
+-Event-Erstellung und -Verwaltung: Trainer können neue Events erstellen, bearbeiten und löschen.
+-Anmeldungen für Events: Spieler können ihre Teilnahme an Events bestätigen oder absagen.
+-Authentifizierung: Benutzer können sich anmelden und registrieren, mit unterschiedlichen Rechten für Trainer und Spieler.
 
 
-### Datenmanagement
-- **Einlesen**: Import von Spielerdaten und Spielplänen.
-- **Speichern**: Speicherung von Veranstaltungsdetails und Spielerprofilen.
-- **Ausgabe**: Export von Statistiken, Spielerlisten und Veranstaltungsdetails.
+## Setup
+Voraussetzungen: Stellen Sie sicher, dass Python und Flask auf Ihrem System installiert sind. Informationen zur Installation finden Sie auf den offiziellen Websites von Python und Flask.
 
-### Nutzeraktionen
-- **Veranstaltungserstellung**: Trainer können neue Veranstaltungen(Training, Spiele) planen.
-- **RSVP**: Spieler können ihre Teilnahme an Veranstaltungen bestätigen oder ablehnen.
-- **Profilverwaltung**: Nutzer können ihre Profile aktualisieren.
+Erste Schritte
+Nach dem Start der Anwendung:
 
-### Externe Datenquellen
-- Generell werden keine Externe Datenquellen benötgt.
-- Optional könnte die Einbindung externer Datenquellen für Wetterprognosen, Spielpläne oder Live-Spielstatistiken realisiert werden.
+Registrierung: Registrieren Sie sich als neuer Benutzer über den "Sign Up"-Link.
 
-## Ziel
-Die Plattform zielt darauf ab, den Verwaltungsaufwand für Trainer zu minimieren und gleichzeitig die Kommunikation und Koordination zwischen den Teammitgliedern zu verbessern.
+Login: Melden Sie sich mit Ihren Benutzerdaten an.
+
+Event-Verwaltung: Als Trainer können Sie neue Events hinzufügen und bestehende verwalten.
+
+Teilnahme an Events: Als Spieler können Sie Events einsehen und Ihre Teilnahme zusagen oder absagen.
+
+
+## Technologien
+Frontend: HTML, CSS, JavaScript
+Backend: Flask (Python)
+Datenbank: SQLite
+
